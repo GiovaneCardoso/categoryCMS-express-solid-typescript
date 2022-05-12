@@ -1,35 +1,42 @@
-import { Category } from "../model/Category"
+import { Category } from "../model/Category";
 
 interface ICreateCategory {
-    name: string;
-    description: string;
+  name: string;
+  description: string;
 }
 
 class CategoryRepository {
-    private categories: Category[];
+  private categories: Category[];
+  private static instance: CategoryRepository;
 
-    constructor() {
-        this.categories = [];
+  static getInstance(): CategoryRepository {
+    if (!CategoryRepository.instance) {
+      CategoryRepository.instance = new CategoryRepository();
     }
-    create({name, description}: ICreateCategory): void {
-        const category = new Category()
-        Object.assign(category, {
-            name,
-            description,
-            created_at: new Date()
-        })
-        
-        this.categories.push(category)
-    }
+    return CategoryRepository.instance;
+  }
 
-    list(): Category[] {
-        return this.categories
-    }
+  private constructor() {
+    this.categories = [];
+  }
+  create({ name, description }: ICreateCategory): void {
+    const category = new Category();
+    Object.assign(category, {
+      name,
+      description,
+      created_at: new Date(),
+    });
 
-    findByName(name: string): Category {
-        const category = this.categories.find(category => category.name === name)
-        return category
-    }
+    this.categories.push(category);
+  }
 
+  list(): Category[] {
+    return this.categories;
+  }
+
+  findByName(name: string): Category {
+    const category = this.categories.find((category) => category.name === name);
+    return category;
+  }
 }
-export { CategoryRepository }
+export { CategoryRepository };
