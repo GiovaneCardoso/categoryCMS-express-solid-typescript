@@ -1,11 +1,7 @@
-import { Category } from "../model/Category";
+import { Category } from "../../model/Category";
+import { ICategoriesRepository } from "../ICategoriesRepository";
 
-interface ICreateCategory {
-  name: string;
-  description: string;
-}
-
-class CategoryRepository {
+class CategoryRepository implements ICategoriesRepository {
   private categories: Category[];
   private static instance: CategoryRepository;
 
@@ -19,7 +15,7 @@ class CategoryRepository {
   private constructor() {
     this.categories = [];
   }
-  create({ name, description }: ICreateCategory): void {
+  create({ name, description }): void {
     const category = new Category();
     Object.assign(category, {
       name,
