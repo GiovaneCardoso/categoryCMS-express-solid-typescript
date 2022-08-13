@@ -3,8 +3,8 @@ import { ListCategoriesUseCase } from "./ListCategoriesUseCase";
 
 export class ListCategoriesController {
   constructor(private listCategoriesService: ListCategoriesUseCase) {}
-  handle(request: Request, response: Response) {
-    const categories = this.listCategoriesService.execute();
+  async handle(request: Request, response: Response) {
+    const categories = await this.listCategoriesService.execute();
     return response.json(categories);
   }
 }
