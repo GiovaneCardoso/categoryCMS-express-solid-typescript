@@ -1,4 +1,4 @@
-import { getRepository, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { dataSource } from "../../../../database";
 import { Category } from "../../entities/Category";
 import { ICategoriesRepository } from "../ICategoriesRepository";
@@ -17,7 +17,6 @@ class CategoryRepository implements ICategoriesRepository {
 
   async list(): Promise<Category[]> {
     const categories = await this.repository.find();
-    console.log("cat", categories);
     return categories;
   }
 
